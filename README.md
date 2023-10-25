@@ -14,17 +14,23 @@ In today's digital age, image processing is a fundamental aspect of various indu
 <br>
 To achieve the desired functionality, the tool utilizes a combination of traditional image processing techniques and deep learning approaches. Here is a brief overview of the algorithms and methods incorporated:<br>
 
-## Basic Requirements
-<br>
+## Basic Requirements<br>
 Image Upload<br>
 
-The tool allows users to upload images of their choice, making it a user-friendly platform for image processing.<br>
-Basic Manipulations<br>
-Color Change:<br> Users can transform images into color, black and white (BW), and grayscale formats.<br>
-Transformations:<br>
-Rotation:<br> Images can be rotated to any desired angle.<br>
-Cropping:<br> The tool enables users to crop images to their desired size and shape.<br>
-Flipping: <br>Users can invert the colors of the image.<br>
+The tool allows users to upload images of their choice, making it a user-friendly platform for image processing.
+<br>
+Basic Manipulations
+<br>
+Color Change:
+<br> Users can transform images into color, black and white (BW), and grayscale formats.<br>
+Transformations:
+<br>
+Rotation:
+<br> Images can be rotated to any desired angle.<br>
+Cropping:
+<br> The tool enables users to crop images to their desired size and shape.<br>
+Flipping:
+ <br>Users can invert the colors of the image.<br>
 
 ##  Advanced Requirements
 <br>
