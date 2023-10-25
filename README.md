@@ -16,13 +16,11 @@ To achieve the desired functionality, the tool utilizes a combination of traditi
 
 ## Basic Requirements
 <br>
+Image Upload<br>
 
-#Image Upload
-
-<br>
 The tool allows users to upload images of their choice, making it a user-friendly platform for image processing.<br>
-#Basic Manipulations<br>
-Color Change: Users can transform images into color, black and white (BW), and grayscale formats.<br>
+Basic Manipulations<br>
+Color Change:<br> Users can transform images into color, black and white (BW), and grayscale formats.<br>
 Transformations:<br>
 Rotation:<br> Images can be rotated to any desired angle.<br>
 Cropping:<br> The tool enables users to crop images to their desired size and shape.<br>
@@ -72,7 +70,8 @@ In addition to image enhancement, the tool also offers a style transfer feature,
 
 ## Model Architectures
 <br>
-The tool relies on the following model architectures and techniques:<br>
+The tool relies on the following model architectures and techniques:
+<br>
 
 VGG-19 Model: This deep learning model is used for style transfer. It is pre-trained on a large dataset and enables the extraction of content and style features from images.<br>
 
