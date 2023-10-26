@@ -264,7 +264,7 @@ def style_transfer(content_image, style_image, epochs=10, style_weight=1e-2, con
     return image
 
 
-style_image_path='Downloads/starnight.jpg'
+style_image_path='images/starnight.jpg'
 
 def perform_style_transfer():
     global selected_image_path
@@ -276,7 +276,7 @@ def perform_style_transfer():
         
 
         # Path to your style image
-        style_image_path = 'Downloads/starnight.jpg'
+        style_image_path = 'images/starnight.jpg'
 
         style_image=style_image_path 
 
