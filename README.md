@@ -52,7 +52,7 @@ Image Enhancement<br>
 
 Image enhancement is a crucial component of the comprehensive image processing tool, and it's achieved through the use of autoencoders. Autoencoders are a class of neural networks that are particularly effective for tasks like denoising, deblurring, and enhancing images.<br>
 
-#Autoencoders for Image Enhancement<br>
+Autoencoders for Image Enhancement<br>
 
 Autoencoders are neural networks consisting of an encoder and a decoder. The encoder compresses the input image into a lower-dimensional representation, and the decoder then reconstructs the image from this representation. In the context of image enhancement, the autoencoder aims to reduce noise, increase sharpness, and enhance overall image quality.
 <br>
