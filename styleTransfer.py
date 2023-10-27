@@ -8,9 +8,7 @@ import numpy as np
 from pathlib import Path
 import tensorflow as tf
 import matplotlib.pyplot as plt
-
-
-
+from PIL import ImageEnhance
 
 
 root = tk.Tk()
@@ -22,6 +20,8 @@ original_image_reference = None
 selected_image_reference = None
 color_change_canvas = None
 grayscale_image_reference = None
+segmented_image_reference = None
+color_change_canvas = None
 
 
 history = []
@@ -35,6 +35,83 @@ rotation_angle = tk.DoubleVar()
 def create_button(parent, text, command, bg, fg, font):
     button = tk.Button(parent, text=text, command=command, bg=bg, fg=fg, font=font)
     return button
+
+
+#
+def adjust_color():
+    global selected_image_reference
+
+    if selected_image_reference:
+        try:
+            img = ImageTk.getimage(selected_image_reference)
+
+            # Get the values from the scales
+            saturation = saturation_scale.get()
+            hue = hue_scale.get()
+            lightness = lightness_scale.get()
+
+            # Convert the image to the HSV color space
+            img_hsv = img.convert('HSV')
+
+            # Adjust the color based on the values
+            img_hsv = ImageEnhance.Color(img_hsv).enhance(saturation)
+            img_hsv = ImageEnhance.Brightness(img_hsv).enhance(lightness)
+            img_hsv = ImageEnhance.Contrast(img_hsv).enhance(lightness)
+
+            # Convert the image back to RGB
+            img_rgb = img_hsv.convert('RGB')
+
+            # Update the canvas with the adjusted image
+            adjusted_image_reference = ImageTk.PhotoImage(image=img_rgb)
+            update_image_canvas(adjusted_image_reference)
+        except Exception as e:
+            print(f"Error adjusting color: {str(e)}")
+
+
+
+
+
+# Uncomment the following code for image segmentation
+def perform_image_segmentation():
+    global selected_image_path, selected_image_reference
+
+    if selected_image_path:
+        try:
+            img = cv2.imread(selected_image_path)
+
+            # Convert the image to HSV color space for better color-based segmentation
+            img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+            # Define the lower and upper bounds for the color you want to segment
+            lower_bound = np.array([0, 0, 0])  # Adjust these values based on your color
+            upper_bound = np.array([255, 255, 255])  # Adjust these values based on your color
+
+            # Create a mask using inRange function
+            mask = cv2.inRange(img_hsv, lower_bound, upper_bound)
+
+            # Bitwise AND operation to segment the image
+            segmented_image = cv2.bitwise_and(img, img, mask=mask)
+
+            photo_segmented = ImageTk.PhotoImage(image=Image.fromarray(segmented_image))
+
+            # Update the canvas with the segmented image
+            update_image_canvas(photo_segmented)
+        except Exception as e:
+            print(f"Error performing image segmentation: {str(e)}")
+    else:
+        print("Please select an image before performing image segmentation.")
+
+
+
+
+
+        
+def display_segmented_image():
+    global segmented_image_reference
+    if segmented_image_reference:
+        update_image_canvas(segmented_image_reference)
+
+
 
 def update_image_canvas(new_image):
     global selected_image_reference
@@ -133,7 +210,9 @@ def convert_to_bw():
         _, img_bw = cv2.threshold(img_gray, 128, 255, cv2.THRESH_BINARY)
         photo_bw = ImageTk.PhotoImage(image=Image.fromarray(img_bw))
         update_image_canvas(photo_bw)
-
+        
+        
+        
 def undo_last_action():
     global selected_image_reference
     if len(history) > 1:
@@ -287,7 +366,8 @@ def perform_style_transfer():
         
     else:
         print("Please select an image before performing style transfer.")
-        
+
+
 # Function to display the stylized image
 def display_stylized_image(stylized_image):
     img = stylized_image[0].numpy()
@@ -316,6 +396,21 @@ sidebar_frame.pack(fill="y", side=tk.LEFT)
 right_sidebar_frame = tk.Frame(root, width=550, bg="#001133")
 right_sidebar_frame.pack(fill="y", side=tk.RIGHT)
 
+# Add value bars for saturation, hue, and lightness
+saturation_scale = Scale(right_sidebar_frame, from_=0, to=2, orient="horizontal", length=200, resolution=0.1, label="Saturation", background="#333333", foreground="white")
+saturation_scale.pack(pady=15)
+
+hue_scale = Scale(right_sidebar_frame, from_=0, to=2, orient="horizontal", length=200, resolution=0.1, label="Hue", background="#333333", foreground="white")
+hue_scale.pack(pady=10)
+
+lightness_scale = Scale(right_sidebar_frame, from_=-1, to=1, orient="horizontal",length=200, resolution=0.1, label="Lightness", background="#333333", foreground="white")
+lightness_scale.pack(pady=10)
+
+# Create a button for image segmentation
+segmentation_button = create_button(right_sidebar_frame, "Image Segmentation", perform_image_segmentation, "#333333", "white", ("Helvetica", 12))
+segmentation_button.pack(pady=10)
+
+
 right_sidebar_label = tk.Label(right_sidebar_frame, text="Advanced Conversions",font=("Helvetica", 14, "bold"), background="#001133", foreground="white")
 right_sidebar_label.pack(pady=20)
 
@@ -334,6 +429,15 @@ convert_to_grayscale_button.pack(pady=10)
 
 convert_to_bw_button = create_button(sidebar_frame, "Convert to B/W", convert_to_bw, "#333333", "white", ("Helvetica", 12))
 convert_to_bw_button.pack(pady=10)
+
+
+
+# Create a button to trigger color adjustment
+adjust_color_button = create_button(sidebar_frame, "Adjust Color", adjust_color, "#333333", "white", ("Helvetica", 12))
+adjust_color_button.pack(pady=10)
+
+
+
 
 transformations_menu = tk.Menubutton(sidebar_frame, text="Transformations", relief=tk.RAISED, bg="#333333", fg="white", font=("Helvetica", 12))
 transformations_menu.pack(pady=10)
@@ -411,6 +515,7 @@ def apply_filter():
 
 apply_filter_button = create_button(sidebar_frame, "Apply Filter", apply_filter, "#333333", "white", ("Helvetica", 12))
 apply_filter_button.pack(pady=10)
+
 
 
 
