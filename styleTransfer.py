@@ -406,6 +406,11 @@ hue_scale.pack(pady=10)
 lightness_scale = Scale(right_sidebar_frame, from_=-1, to=1, orient="horizontal",length=200, resolution=0.1, label="Lightness", background="#333333", foreground="white")
 lightness_scale.pack(pady=10)
 
+
+# Create a button to trigger color adjustment
+adjust_color_button = create_button(right_sidebar_frame, "Adjust Color", adjust_color, "#333333", "white", ("Helvetica", 12))
+adjust_color_button.pack(pady=10)
+
 # Create a button for image segmentation
 segmentation_button = create_button(right_sidebar_frame, "Image Segmentation", perform_image_segmentation, "#333333", "white", ("Helvetica", 12))
 segmentation_button.pack(pady=10)
@@ -432,9 +437,6 @@ convert_to_bw_button.pack(pady=10)
 
 
 
-# Create a button to trigger color adjustment
-adjust_color_button = create_button(sidebar_frame, "Adjust Color", adjust_color, "#333333", "white", ("Helvetica", 12))
-adjust_color_button.pack(pady=10)
 
 
 
