@@ -48,28 +48,12 @@ The tool supports image segmentation, allowing users to divide images into multi
 
 ## Deep Learning Requirements<br>
 
-Image Enhancement<br>
+Image Segmentation <br>
 
-Image enhancement is a crucial component of the comprehensive image processing tool, and it's achieved through the use of autoencoders. Autoencoders are a class of neural networks that are particularly effective for tasks like denoising, deblurring, and enhancing images.<br>
-
-Autoencoders for Image Enhancement<br>
-
-Autoencoders are neural networks consisting of an encoder and a decoder. The encoder compresses the input image into a lower-dimensional representation, and the decoder then reconstructs the image from this representation. In the context of image enhancement, the autoencoder aims to reduce noise, increase sharpness, and enhance overall image quality.
-<br>
-
-The steps involved in using autoencoders for image enhancement in the tool are as follows:<br>
-
-Data Preparation:<br> Image data is preprocessed and fed into the autoencoder model. The input data may include noisy or low-quality images that require enhancement.<br>
-
-Model Architecture:<br> The autoencoder architecture consists of an encoder network that reduces the dimensionality of the input image and a decoder network that reconstructs the enhanced image. Multiple hidden layers in the encoder and decoder capture the features necessary for denoising and enhancing.<br>
-
-Training:<br> The autoencoder is trained on a dataset of noisy and clean images. During training, it learns to map noisy images to their corresponding clean versions. This process involves minimizing a loss function that measures the difference between the reconstructed image and the original clean image.<br>
-
-Inference:<br> Once the autoencoder is trained, it can be applied to any input image to remove noise, enhance sharpness, and improve image quality.<br>
-
-User Interaction: <br>Users of the tool can select the "Image Enhancement" option and specify the strength of enhancement. The tool then utilizes the trained autoencoder to process the selected image.<br>
-
-The application of autoencoders for image enhancement adds a powerful feature to the tool, making it capable of reducing noise and enhancing the quality of images, which is particularly valuable in scenarios like restoring old photographs or improving the clarity of medical images.<br>
+The code performs image segmentation using OpenCV. It converts the image to the HSV
+color space and then defines lower and upper bounds for color ranges. A mask is created
+using the inRange function, which is used to segment the image by selecting pixels that fall
+within the specified color range.<br>
 
 Style Transfer<br>
 In addition to image enhancement, the tool also offers a style transfer feature, allowing users to apply artistic styles from one image to another. This creative transformation can turn ordinary photos into works of art and offers a wide range of artistic possibilities.<br>
