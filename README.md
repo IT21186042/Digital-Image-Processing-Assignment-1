@@ -73,3 +73,7 @@ Neural Style Transfer: This technique combines content and style images to creat
 The comprehensive image processing tool presented in this report provides users with a wide range of image manipulation capabilities. By combining traditional image processing techniques with deep learning algorithms, the tool empowers users to enhance and transform their images in creative and practical ways. Whether for basic adjustments or advanced artistic transformations, this tool offers a valuable resource for a wide range of applications.<br>
 
 With a user-friendly interface and a rich set of features, this tool is well-equipped to meet the diverse needs of users seeking to process and enhance their images.
+
+## Note
+
+<br> make sure to run in jupitor note book
